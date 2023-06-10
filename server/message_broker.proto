@@ -1,11 +1,6 @@
 syntax = "proto3";
 
-package message_broker;
-
-service MessageBrokerService {
-  rpc PublishMessage(MessageRequest) returns (MessageResponse) {}
-  rpc SubscribeToTopic(TopicRequest) returns (stream Message) {}
-}
+package messagebroker;
 
 message MessageRequest {
   string topic = 1;
@@ -13,15 +8,30 @@ message MessageRequest {
 }
 
 message MessageResponse {
-  bool success = 1;
-  string message = 2;
+  string message = 1;
 }
 
 message TopicRequest {
   string topic = 1;
 }
 
-message Message {
+message TopicListRequest {}
+
+message TopicListResponse {
+  repeated string topics = 1;
+}
+
+message CheckRequest {
   string topic = 1;
-  string message = 2;
+}
+
+message CheckResponse {
+  bool has_new_messages = 1;
+}
+
+service MessageBrokerService {
+  rpc PublishMessage(MessageRequest) returns (MessageResponse) {}
+  rpc SubscribeToTopic(TopicRequest) returns (MessageResponse) {}
+  rpc CheckNewMessages(CheckRequest) returns (CheckResponse) {}
+  rpc GetTopicList(TopicListRequest) returns (TopicListResponse) {}
 }

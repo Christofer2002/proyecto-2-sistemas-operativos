@@ -7,11 +7,15 @@ import logging
 import message_broker_pb2
 import message_broker_pb2_grpc
 
-# Definición de la cola de mensajes por tema
-message_queues = {}
+# Definition of message queues per topic
+message_queues = {
+    'Noticias': queue.Queue(),
+    'Entretenimiento': queue.Queue(),
+    'Deportes': queue.Queue()
+}
 
-# Implementación del servicio del message broker
-class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerService):
+# Implementation of the message broker service
+class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer):
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -20,38 +24,46 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerService):
         topic = request.topic
         message = request.message
 
-        # Verificar si el tema existe en la cola de mensajes
+        # Verify if the topic exists in the message queue
         if topic not in message_queues:
-            message_queues[topic] = queue.Queue()
+            response = message_broker_pb2.MessageResponse(message="\nEl tema especificado no existe")
+            return response
         
-        # Insertar el mensaje en la cola del tema correspondiente
+        # Insert the message into the corresponding topic queue
         message_queues[topic].put(message)
 
-        response = message_broker_pb2.MessageResponse(success=True, message="Mensaje publicado con éxito")
+        response = message_broker_pb2.MessageResponse(message="\nMensaje publicado con éxito")
         return response
     
     def SubscribeToTopic(self, request, context):
         topic = request.topic
 
-        # Verificar si el tema existe en la cola de mensajes
+        # Verify if the topic exists in the message queue
         if topic not in message_queues:
-            response = message_broker_pb2.Message()
-            response.topic = topic
-            response.message = "No hay mensajes disponibles en el tema"
+            response = message_broker_pb2.MessageResponse(message="\nEl tema especificado no existe")
             return response
-        
-        # Consumir mensajes de la cola del tema correspondiente
-        while True:
-            try:
-                message = message_queues[topic].get(timeout=1)
-                response = message_broker_pb2.Message()
-                response.topic = topic
-                response.message = message
-                yield response
-            except queue.Empty:
-                break
+        else:
+            response = message_broker_pb2.MessageResponse(message="\nSubscripción exitosa al tema: " + topic)
+            return response
     
-# Configuración del servidor gRPC
+    def CheckNewMessages(self, request, context):
+        topic = request.topic
+
+        # Verify if the topic exists in the message queue
+        if topic in message_queues:
+            has_new_messages = not message_queues[topic].empty()
+        else:
+            has_new_messages = False
+        
+        response = message_broker_pb2.CheckResponse(has_new_messages=has_new_messages)
+        return response
+    
+    def GetTopicList(self, request, context):
+        topics = list(message_queues.keys())
+        response = message_broker_pb2.TopicListResponse(topics=topics)
+        return response
+
+# gRPC server configuration
 def run_server():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     message_broker_pb2_grpc.add_MessageBrokerServiceServicer_to_server(MessageBrokerServicer(), server)

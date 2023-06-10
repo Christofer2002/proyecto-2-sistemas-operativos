@@ -13,21 +13,27 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14message_broker.proto\x12\x0emessage_broker\"0\n\x0eMessageRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"3\n\x0fMessageResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x1d\n\x0cTopicRequest\x12\r\n\x05topic\x18\x01 \x01(\t\")\n\x07Message\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t2\xba\x01\n\x14MessageBrokerService\x12S\n\x0ePublishMessage\x12\x1e.message_broker.MessageRequest\x1a\x1f.message_broker.MessageResponse\"\x00\x12M\n\x10SubscribeToTopic\x12\x1c.message_broker.TopicRequest\x1a\x17.message_broker.Message\"\x00\x30\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14message_broker.proto\x12\rmessagebroker\"0\n\x0eMessageRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\"\n\x0fMessageResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1d\n\x0cTopicRequest\x12\r\n\x05topic\x18\x01 \x01(\t\"\x12\n\x10TopicListRequest\"#\n\x11TopicListResponse\x12\x0e\n\x06topics\x18\x01 \x03(\t\"\x1d\n\x0c\x43heckRequest\x12\r\n\x05topic\x18\x01 \x01(\t\")\n\rCheckResponse\x12\x18\n\x10has_new_messages\x18\x01 \x01(\x08\x32\xe2\x02\n\x14MessageBrokerService\x12Q\n\x0ePublishMessage\x12\x1d.messagebroker.MessageRequest\x1a\x1e.messagebroker.MessageResponse\"\x00\x12Q\n\x10SubscribeToTopic\x12\x1b.messagebroker.TopicRequest\x1a\x1e.messagebroker.MessageResponse\"\x00\x12O\n\x10\x43heckNewMessages\x12\x1b.messagebroker.CheckRequest\x1a\x1c.messagebroker.CheckResponse\"\x00\x12S\n\x0cGetTopicList\x12\x1f.messagebroker.TopicListRequest\x1a .messagebroker.TopicListResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'message_broker_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _MESSAGEREQUEST._serialized_start=40
-  _MESSAGEREQUEST._serialized_end=88
-  _MESSAGERESPONSE._serialized_start=90
-  _MESSAGERESPONSE._serialized_end=141
-  _TOPICREQUEST._serialized_start=143
-  _TOPICREQUEST._serialized_end=172
-  _MESSAGE._serialized_start=174
-  _MESSAGE._serialized_end=215
-  _MESSAGEBROKERSERVICE._serialized_start=218
-  _MESSAGEBROKERSERVICE._serialized_end=404
+  _MESSAGEREQUEST._serialized_start=39
+  _MESSAGEREQUEST._serialized_end=87
+  _MESSAGERESPONSE._serialized_start=89
+  _MESSAGERESPONSE._serialized_end=123
+  _TOPICREQUEST._serialized_start=125
+  _TOPICREQUEST._serialized_end=154
+  _TOPICLISTREQUEST._serialized_start=156
+  _TOPICLISTREQUEST._serialized_end=174
+  _TOPICLISTRESPONSE._serialized_start=176
+  _TOPICLISTRESPONSE._serialized_end=211
+  _CHECKREQUEST._serialized_start=213
+  _CHECKREQUEST._serialized_end=242
+  _CHECKRESPONSE._serialized_start=244
+  _CHECKRESPONSE._serialized_end=285
+  _MESSAGEBROKERSERVICE._serialized_start=288
+  _MESSAGEBROKERSERVICE._serialized_end=642
 # @@protoc_insertion_point(module_scope)
