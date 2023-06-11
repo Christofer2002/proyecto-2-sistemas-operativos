@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14message_broker.proto\x12\rmessagebroker\"0\n\x0eMessageRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\"\n\x0fMessageResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1d\n\x0cTopicRequest\x12\r\n\x05topic\x18\x01 \x01(\t\"\x12\n\x10TopicListRequest\"#\n\x11TopicListResponse\x12\x0e\n\x06topics\x18\x01 \x03(\t\"\x1d\n\x0c\x43heckRequest\x12\r\n\x05topic\x18\x01 \x01(\t\")\n\rCheckResponse\x12\x18\n\x10has_new_messages\x18\x01 \x01(\x08\x32\xe2\x02\n\x14MessageBrokerService\x12Q\n\x0ePublishMessage\x12\x1d.messagebroker.MessageRequest\x1a\x1e.messagebroker.MessageResponse\"\x00\x12Q\n\x10SubscribeToTopic\x12\x1b.messagebroker.TopicRequest\x1a\x1e.messagebroker.MessageResponse\"\x00\x12O\n\x10\x43heckNewMessages\x12\x1b.messagebroker.CheckRequest\x1a\x1c.messagebroker.CheckResponse\"\x00\x12S\n\x0cGetTopicList\x12\x1f.messagebroker.TopicListRequest\x1a .messagebroker.TopicListResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14message_broker.proto\x12\rmessagebroker\"0\n\x0eMessageRequest\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\"\n\x0fMessageResponse\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1d\n\x0cTopicRequest\x12\r\n\x05topic\x18\x01 \x01(\t\"\x12\n\x10TopicListRequest\"#\n\x11TopicListResponse\x12\x0e\n\x06topics\x18\x01 \x03(\t\"\x1d\n\x0c\x43heckRequest\x12\r\n\x05topic\x18\x01 \x01(\t\")\n\rCheckResponse\x12\x18\n\x10has_new_messages\x18\x01 \x01(\x08\x32\xc1\x03\n\x14MessageBrokerService\x12Q\n\x0ePublishMessage\x12\x1d.messagebroker.MessageRequest\x1a\x1e.messagebroker.MessageResponse\"\x00\x12Q\n\x10SubscribeToTopic\x12\x1b.messagebroker.TopicRequest\x1a\x1e.messagebroker.MessageResponse\"\x00\x12O\n\x10\x43heckNewMessages\x12\x1b.messagebroker.CheckRequest\x1a\x1c.messagebroker.CheckResponse\"\x00\x12S\n\x0cGetTopicList\x12\x1f.messagebroker.TopicListRequest\x1a .messagebroker.TopicListResponse\"\x00\x12]\n\x16GetSubscribedTopicList\x12\x1f.messagebroker.TopicListRequest\x1a .messagebroker.TopicListResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'message_broker_pb2', globals())
@@ -35,5 +35,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CHECKRESPONSE._serialized_start=244
   _CHECKRESPONSE._serialized_end=285
   _MESSAGEBROKERSERVICE._serialized_start=288
-  _MESSAGEBROKERSERVICE._serialized_end=642
+  _MESSAGEBROKERSERVICE._serialized_end=737
 # @@protoc_insertion_point(module_scope)

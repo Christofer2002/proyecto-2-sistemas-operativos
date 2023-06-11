@@ -34,6 +34,11 @@ class MessageBrokerServiceStub(object):
                 request_serializer=message__broker__pb2.TopicListRequest.SerializeToString,
                 response_deserializer=message__broker__pb2.TopicListResponse.FromString,
                 )
+        self.GetSubscribedTopicList = channel.unary_unary(
+                '/messagebroker.MessageBrokerService/GetSubscribedTopicList',
+                request_serializer=message__broker__pb2.TopicListRequest.SerializeToString,
+                response_deserializer=message__broker__pb2.TopicListResponse.FromString,
+                )
 
 
 class MessageBrokerServiceServicer(object):
@@ -63,6 +68,12 @@ class MessageBrokerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetSubscribedTopicList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MessageBrokerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -83,6 +94,11 @@ def add_MessageBrokerServiceServicer_to_server(servicer, server):
             ),
             'GetTopicList': grpc.unary_unary_rpc_method_handler(
                     servicer.GetTopicList,
+                    request_deserializer=message__broker__pb2.TopicListRequest.FromString,
+                    response_serializer=message__broker__pb2.TopicListResponse.SerializeToString,
+            ),
+            'GetSubscribedTopicList': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSubscribedTopicList,
                     request_deserializer=message__broker__pb2.TopicListRequest.FromString,
                     response_serializer=message__broker__pb2.TopicListResponse.SerializeToString,
             ),
@@ -159,6 +175,23 @@ class MessageBrokerService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/messagebroker.MessageBrokerService/GetTopicList',
+            message__broker__pb2.TopicListRequest.SerializeToString,
+            message__broker__pb2.TopicListResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSubscribedTopicList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/messagebroker.MessageBrokerService/GetSubscribedTopicList',
             message__broker__pb2.TopicListRequest.SerializeToString,
             message__broker__pb2.TopicListResponse.FromString,
             options, channel_credentials,
