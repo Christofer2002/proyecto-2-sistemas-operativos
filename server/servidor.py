@@ -7,23 +7,21 @@ import logging
 import message_broker_pb2
 import message_broker_pb2_grpc
 
-# Definición de colas de mensajes por tema
+# Definition of message queues per topic
 message_queues = {
     'Noticias': queue.Queue(5),
     'Entretenimiento': queue.Queue(5),
     'Deportes': queue.Queue(5)
 }
 
-
-# Definición de clientes suscritos por tema
+# Definition of subscribed clients per topic
 subscribed_clients = {
     'Noticias': set(),
     'Entretenimiento': set(),
     'Deportes': set()
 }
 
-
-# Implementación del servicio de intermediario de mensajes
+# Implementation of the message broker service
 class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer):
     
     def __init__(self):
@@ -33,12 +31,12 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
         topic = request.topic
         message = request.message
 
-        # Verificar si el tema existe en la cola de mensajes
+        # Verify if the topic exists in the message queue
         if topic not in message_queues:
             response = message_broker_pb2.MessageResponse(message="\nEl tema especificado no existe")
             return response
 
-        # Insertar el mensaje en la cola correspondiente al tema
+        # Insert the message into the corresponding topic queue
         if not message_queues[topic].full():
             message_queues[topic].put(message)
         else:
@@ -52,52 +50,75 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
     def SubscribeToTopic(self, request, context):
         topic = request.topic
 
-        # Verificar si el tema existe en la cola de mensajes
+        # Verify if the topic exists in the message queue
         if topic not in message_queues:
             response = message_broker_pb2.MessageResponse(message="\nEl tema especificado no existe")
             return response
         
-        # Obtener el ID del cliente del contexto
+        # Get the client id from context
         client_id = context.peer()
 
-        # Agregar el cliente a los clientes suscritos al tema
+        # Add the client to the subscribed clients for the topic
         subscribed_clients[topic].add(client_id)
 
         response = message_broker_pb2.MessageResponse(message="\nSubscripción exitosa al tema: " + topic)
         return response
     
-
     def GetTopicList(self, request, context):
         topics = list(message_queues.keys())
         response = message_broker_pb2.TopicListResponse(topics=topics)
         return response
     
-
     def GetSubscribedTopicList(self, request, context):
-        # Obtener el ID del cliente del contexto
+        # Get the client id from context
         client_id = context.peer()
 
-        # Encontrar los temas a los que el cliente está suscrito
+        # Find the topics subscribed by the client
         subscribed_topics = [topic for topic, clients in subscribed_clients.items() if client_id in clients]
 
         response = message_broker_pb2.TopicListResponse(topics=subscribed_topics)
         return response
+    
+    def ListenForNewMessages(self, request, context):
+        topic = request.topic
+
+        # Verify if the topic exists in the message queue
+        if topic not in message_queues:
+            response = message_broker_pb2.MessageResponse(message="\nEl tema especificado no existe")
+            return response
+        
+        # Get the client id from context
+        client_id = context.peer()
+
+        # Check if the client is subscribed to the topic
+        if client_id not in subscribed_clients[topic]:
+            response = message_broker_pb2.MessageResponse(message="\nEl cliente no está suscrito al tema: " + topic)
+            return response
+
+        message_queue = message_queues[topic]
+
+        # Listen for new messages in the topic queue
+        while True:
+            try:
+                message = message_queue.get(timeout=5)  # Wait for 5 seconds for a new message
+                yield message_broker_pb2.MessageResponse(message=message)
+            except queue.Empty:
+                continue  # Continue listening for new messages
 
 
-# Configuración del servidor gRPC
+# gRPC server configuration
 def run_server():
     server = grpc.server(futures.ThreadPoolExecutor())
     message_broker_pb2_grpc.add_MessageBrokerServiceServicer_to_server(MessageBrokerServicer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
-    print("\nServidor iniciado en el puerto 50051")
+    print("Servidor iniciado en el puerto 50051...")
     print("Para detener el servidor, presione Ctrl + C")
     try:
         while True:
             time.sleep(86400)
     except KeyboardInterrupt:
         server.stop(0)
-
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

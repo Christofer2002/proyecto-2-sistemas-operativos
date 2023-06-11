@@ -47,7 +47,6 @@ def SubscribeToTopic(stub):
 
 
 def ListenForNewMessages(stub, topic):
-    '''Escucha los mensajes de un tema.
     try:
         print("\nEsperando mensajes en el tema " + topic + "...")
         print("Para salir del tema, presione Ctrl + C")
@@ -59,8 +58,6 @@ def ListenForNewMessages(stub, topic):
 
     except KeyboardInterrupt:
         print("\nSaliendo del tema " + topic + "...")
-    '''
-
 
 
 def GetTopicList(stub):

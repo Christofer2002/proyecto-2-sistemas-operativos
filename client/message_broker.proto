@@ -35,4 +35,5 @@ service MessageBrokerService {
   rpc CheckNewMessages(CheckRequest) returns (CheckResponse) {}
   rpc GetTopicList(TopicListRequest) returns (TopicListResponse) {}
   rpc GetSubscribedTopicList(TopicListRequest) returns (TopicListResponse) {}
+  rpc ListenForNewMessages(TopicRequest) returns (stream MessageResponse) {}
 }
