@@ -3,3 +3,26 @@
 2023-06-11 20:29:23,030 Nuevo cliente suscrito al tema: Entretenimiento
 2023-06-11 20:29:24,954 Nuevo cliente suscrito al tema: Deportes
 2023-06-11 20:29:36,592 Nuevo mensaje recibido en el tema Entretenimiento: Hola estoy en entretenimiento
+2023-06-11 21:09:01,595 Servidor iniciado en el puerto 50051...
+2023-06-11 21:09:12,019 Nuevo cliente suscrito al tema: Noticias
+2023-06-11 21:09:18,083 Nuevo cliente suscrito al tema: Noticias
+2023-06-11 21:09:28,838 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 2
+2023-06-11 21:09:31,436 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 2
+2023-06-11 21:11:03,955 Nuevo cliente suscrito al tema: Noticias
+2023-06-11 21:11:15,732 Nuevo cliente suscrito al tema: Noticias
+2023-06-11 21:11:23,271 Nuevo mensaje recibido en el tema Noticias: Hola soy lciente 2
+2023-06-11 21:11:23,271 Mensaje enviado al subscriptor en el tema Noticias: Hola soy lciente 2
+2023-06-11 21:12:50,355 Deteniendo el servidor...
+2023-06-11 21:12:50,355 Servidor detenido
+2023-06-11 21:13:51,029 Servidor iniciado en el puerto 50051...
+2023-06-11 21:14:05,109 Nuevo cliente suscrito al tema: Noticias
+2023-06-11 21:14:09,055 Nuevo cliente suscrito al tema: Noticias
+2023-06-11 21:14:19,365 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 1
+2023-06-11 21:14:23,203 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 1
+2023-06-11 21:14:34,411 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 2
+2023-06-11 21:14:40,090 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 2
+2023-06-11 21:14:56,428 Nuevo mensaje recibido en el tema Noticias: Hola cliente 4
+2023-06-11 21:14:59,878 Mensaje enviado al subscriptor en el tema Noticias: Hola cliente 4
+2023-06-11 21:15:12,913 Nuevo mensaje recibido en el tema Deportes: Hola deportes
+2023-06-11 21:15:26,481 Nuevo cliente suscrito al tema: Deportes
+2023-06-11 21:15:31,548 Mensaje enviado al subscriptor en el tema Deportes: Hola deportes
