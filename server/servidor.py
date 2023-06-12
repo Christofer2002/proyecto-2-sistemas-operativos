@@ -3,9 +3,13 @@ from concurrent import futures
 import time
 import queue
 import logging
+from datetime import datetime
 
 import message_broker_pb2
 import message_broker_pb2_grpc
+
+# Configure logging
+logging.basicConfig(filename='server.log', level=logging.INFO, format='%(asctime)s %(message)s', filemode='a')
 
 # Definition of message queues per topic
 message_queues = {
@@ -39,6 +43,7 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
         # Insert the message into the corresponding topic queue
         if not message_queues[topic].full():
             message_queues[topic].put(message)
+            self.logger.info(f"Nuevo mensaje recibido en el tema {topic}: {message}")
         else:
             response = message_broker_pb2.MessageResponse(message="\nEl tema especificado está lleno")
             return response
@@ -60,6 +65,7 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
 
         # Add the client to the subscribed clients for the topic
         subscribed_clients[topic].add(client_id)
+        self.logger.info(f"Nuevo cliente suscrito al tema: {topic}")
 
         response = message_broker_pb2.MessageResponse(message="\nSubscripción exitosa al tema: " + topic)
         return response
@@ -101,10 +107,10 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
         while True:
             try:
                 message = message_queue.get(timeout=5)  # Wait for 5 seconds for a new message
+                self.logger.info(f"Mensaje enviado al subscriptor en el tema {topic}: {message}")
                 yield message_broker_pb2.MessageResponse(message=message)
             except queue.Empty:
                 continue  # Continue listening for new messages
-
 
 # gRPC server configuration
 def run_server():
@@ -112,14 +118,16 @@ def run_server():
     message_broker_pb2_grpc.add_MessageBrokerServiceServicer_to_server(MessageBrokerServicer(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
+    logging.info("Servidor iniciado en el puerto 50051...")
     print("Servidor iniciado en el puerto 50051...")
     print("Para detener el servidor, presione Ctrl + C")
     try:
         while True:
             time.sleep(86400)
     except KeyboardInterrupt:
+        logging.info("Deteniendo el servidor...")
         server.stop(0)
+        logging.info("Servidor detenido")
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
     run_server()
