@@ -28,6 +28,7 @@ subscribed_clients = {
 
 # Lock for adding subscribed clients
 client_lock = threading.Lock()
+client_queues = {}
 
 # Implementation of the message broker service
 class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer):
@@ -44,12 +45,17 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
             response = message_broker_pb2.MessageResponse(message="\nEl tema especificado no existe")
             return response
 
-        # Insert the message into the corresponding topic queue
-        if not message_queues[topic].full():
-            message_queues[topic].put(message)
-            self.logger.info(f"Nuevo mensaje recibido en el tema {topic}: {message}")
+        # Insert the message into the corresponding client's topic queue
+        if topic in subscribed_clients:
+            for client_id in subscribed_clients[topic]:
+                if not client_queues[client_id][topic].full():
+                    client_queues[client_id][topic].put(message)
+                    self.logger.info(f"Nuevo mensaje recibido en el tema {topic}: {message}")
+                else:
+                    response = message_broker_pb2.MessageResponse(message="\nLa cola del cliente está llena")
+                    return response
         else:
-            response = message_broker_pb2.MessageResponse(message="\nEl tema especificado está lleno")
+            response = message_broker_pb2.MessageResponse(message="\nNo hay clientes suscritos al tema")
             return response
 
         response = message_broker_pb2.MessageResponse(message="\nMensaje publicado con éxito")
@@ -70,6 +76,9 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
         # Add the client to the subscribed clients for the topic
         with client_lock:
             subscribed_clients[topic].add(client_id)
+            if client_id not in client_queues:
+                client_queues[client_id] = {}
+            client_queues[client_id][topic] = queue.Queue(5)
         self.logger.info(f"Nuevo cliente suscrito al tema: {topic}")
 
         response = message_broker_pb2.MessageResponse(message="\nSubscripción exitosa al tema: " + topic)
@@ -106,7 +115,7 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
             response = message_broker_pb2.MessageResponse(message="\nEl cliente no está suscrito al tema: " + topic)
             return response
 
-        message_queue = message_queues[topic]
+        message_queue = client_queues[client_id][topic]
 
         # Listen for new messages in the topic queue
         while True:
