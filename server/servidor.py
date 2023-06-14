@@ -3,6 +3,7 @@ from concurrent import futures
 import time
 import queue
 import logging
+import threading
 from datetime import datetime
 
 import message_broker_pb2
@@ -24,6 +25,9 @@ subscribed_clients = {
     'Entretenimiento': set(),
     'Deportes': set()
 }
+
+# Lock for adding subscribed clients
+client_lock = threading.Lock()
 
 # Implementation of the message broker service
 class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer):
@@ -64,7 +68,8 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
         client_id = context.peer()
 
         # Add the client to the subscribed clients for the topic
-        subscribed_clients[topic].add(client_id)
+        with client_lock:
+            subscribed_clients[topic].add(client_id)
         self.logger.info(f"Nuevo cliente suscrito al tema: {topic}")
 
         response = message_broker_pb2.MessageResponse(message="\nSubscripción exitosa al tema: " + topic)
