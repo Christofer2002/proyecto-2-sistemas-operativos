@@ -49,15 +49,13 @@ def SubscribeToTopic(stub):
 def ListenForNewMessages(stub, topic):
     try:
         print("\nEsperando mensajes en el tema " + topic + "...")
+        print("Para salir del tema, presione Ctrl + C")
 
         topic_request = message_broker_pb2.TopicRequest(topic=topic)
         for message_response in stub.ListenForNewMessages(topic_request):
             print("Nuevo mensaje recibido:")
             print(message_response.message)
 
-            choice = input("Para volver al menú principal, presione 'q' y luego Enter: ")
-            if choice.lower() == 'q':
-                break
 
     except KeyboardInterrupt:
         print("\nSaliendo del tema " + topic + "...")

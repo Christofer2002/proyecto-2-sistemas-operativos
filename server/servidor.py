@@ -107,10 +107,10 @@ class MessageBrokerServicer(message_broker_pb2_grpc.MessageBrokerServiceServicer
         while True:
             try:
                 message = message_queue.get(timeout=5)  # Wait for 5 seconds for a new message
-                self.logger.info(f"Mensaje enviado al subscriptor en el tema {topic}: {message}")
+                self.logger.info(f"Mensaje enviado al subscriptor {client_id} en el tema {topic}: {message}")
                 yield message_broker_pb2.MessageResponse(message=message)
             except queue.Empty:
-                return  # Continue listening for new messages
+                continue  # Continue listening for new messages
 
 # gRPC server configuration
 def run_server():
