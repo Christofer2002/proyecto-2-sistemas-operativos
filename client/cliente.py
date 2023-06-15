@@ -76,34 +76,48 @@ def GetSubscribedTopicList(stub):
 
 
 def run_client():
-    channel = grpc.insecure_channel('localhost:50051')
-    stub = message_broker_pb2_grpc.MessageBrokerServiceStub(channel)
-
     while True:
-        print("\nMenú:")
-        print(" 1. Publicar un mensaje en un tema")
-        print(" 2. Suscribirse a un tema")
-        print(" 3. Obtener lista de temas suscritos")
-        print(" 4. Recibir mensajes de un tema")
-        print(" 5. Salir")
-        choice = input("\nIngrese su elección: ")
+        try:
+            channel = grpc.insecure_channel('localhost:50051')
+            stub = message_broker_pb2_grpc.MessageBrokerServiceStub(channel)
 
-        if choice == "1":
-            PublishMessage(stub)
-        elif choice == "2":
-            SubscribeToTopic(stub)
-        elif choice == "3":
-            PrintTopicList(GetSubscribedTopicList(stub))
-        elif choice == "4":
-            topic_list = GetSubscribedTopicList(stub)
-            if len(topic_list) == 0:
-                print("\nNo se encuentra suscrito a ningún tema.")
-            else:
-                ListenForNewMessages(stub, ValidateTopic(topic_list))
-        elif choice == "5":
+            while True:
+                print("\nMenú:")
+                print(" 1. Publicar un mensaje en un tema")
+                print(" 2. Suscribirse a un tema")
+                print(" 3. Obtener lista de temas suscritos")
+                print(" 4. Recibir mensajes de un tema")
+                print(" 5. Salir")
+                choice = input("\nIngrese su elección: ")
+
+                if choice == "1":
+                    PublishMessage(stub)
+                elif choice == "2":
+                    SubscribeToTopic(stub)
+                elif choice == "3":
+                    PrintTopicList(GetSubscribedTopicList(stub))
+                elif choice == "4":
+                    topic_list = GetSubscribedTopicList(stub)
+                    if len(topic_list) == 0:
+                        print("\nNo se encuentra suscrito a ningún tema.")
+                    else:
+                        ListenForNewMessages(stub, ValidateTopic(topic_list))
+                elif choice == "5":
+                    break
+                else:
+                    print("\nOpción inválida. Por favor, intente nuevamente.")
+
+            print("\nFinalizando programa...")
             break
-        else:
-            print("\nOpción inválida. Por favor, intente nuevamente.")
+
+        except grpc.RpcError as e:
+            print("\nNo se pudo conectar al servidor. Verifique que el servidor esté en funcionamiento.")
+            print("Detalles del error:", e.details())
+
+        except KeyboardInterrupt:
+            print("\nFinalizando programa...")
+            break
+
 
 
 if __name__ == '__main__':

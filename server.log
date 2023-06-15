@@ -1,76 +1,8 @@
-2023-06-11 20:28:59,026 Servidor iniciado en el puerto 50051...
-2023-06-11 20:29:21,789 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 20:29:23,030 Nuevo cliente suscrito al tema: Entretenimiento
-2023-06-11 20:29:24,954 Nuevo cliente suscrito al tema: Deportes
-2023-06-11 20:29:36,592 Nuevo mensaje recibido en el tema Entretenimiento: Hola estoy en entretenimiento
-2023-06-11 21:09:01,595 Servidor iniciado en el puerto 50051...
-2023-06-11 21:09:12,019 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 21:09:18,083 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 21:09:28,838 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 2
-2023-06-11 21:09:31,436 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 2
-2023-06-11 21:11:03,955 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 21:11:15,732 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 21:11:23,271 Nuevo mensaje recibido en el tema Noticias: Hola soy lciente 2
-2023-06-11 21:11:23,271 Mensaje enviado al subscriptor en el tema Noticias: Hola soy lciente 2
-2023-06-11 21:12:50,355 Deteniendo el servidor...
-2023-06-11 21:12:50,355 Servidor detenido
-2023-06-11 21:13:51,029 Servidor iniciado en el puerto 50051...
-2023-06-11 21:14:05,109 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 21:14:09,055 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 21:14:19,365 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 1
-2023-06-11 21:14:23,203 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 1
-2023-06-11 21:14:34,411 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 2
-2023-06-11 21:14:40,090 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 2
-2023-06-11 21:14:56,428 Nuevo mensaje recibido en el tema Noticias: Hola cliente 4
-2023-06-11 21:14:59,878 Mensaje enviado al subscriptor en el tema Noticias: Hola cliente 4
-2023-06-11 21:15:12,913 Nuevo mensaje recibido en el tema Deportes: Hola deportes
-2023-06-11 21:15:26,481 Nuevo cliente suscrito al tema: Deportes
-2023-06-11 21:15:31,548 Mensaje enviado al subscriptor en el tema Deportes: Hola deportes
-2023-06-11 21:17:23,458 Deteniendo el servidor...
-2023-06-11 21:17:23,459 Servidor detenido
-2023-06-11 22:23:29,541 Servidor iniciado en el puerto 50051...
-2023-06-11 22:23:48,358 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 22:23:52,258 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 22:24:01,059 Nuevo mensaje recibido en el tema Noticias: Hola estoy en deporte
-2023-06-11 22:24:05,408 Mensaje enviado al subscriptor en el tema Noticias: Hola estoy en deporte
-2023-06-11 22:24:19,467 Nuevo mensaje recibido en el tema Noticias: Hola es un reenvio
-2023-06-11 22:24:23,583 Mensaje enviado al subscriptor en el tema Noticias: Hola es un reenvio
-2023-06-11 22:24:32,224 Deteniendo el servidor...
-2023-06-11 22:24:32,225 Servidor detenido
-2023-06-11 22:24:36,214 Servidor iniciado en el puerto 50051...
-2023-06-11 22:24:44,191 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 22:24:52,329 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 3
-2023-06-11 22:25:06,529 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 22:25:10,355 Nuevo cliente suscrito al tema: Noticias
-2023-06-11 22:25:12,094 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 3
-2023-06-11 22:25:40,922 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 1
-2023-06-11 22:25:45,423 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 1
-2023-06-13 20:07:27,857 Servidor iniciado en el puerto 50051...
-2023-06-13 20:08:08,155 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:08:12,252 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:08:29,027 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 1
-2023-06-13 20:08:32,970 Mensaje enviado al subscriptor en el tema Noticias: Hola soy cliente 1
-2023-06-13 20:14:43,786 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:14:47,729 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:15:38,652 Nuevo mensaje recibido en el tema Noticias: Hola soy l fdsf 2
-2023-06-13 20:15:55,767 Deteniendo el servidor...
-2023-06-13 20:15:55,770 Servidor detenido
-2023-06-13 20:16:09,247 Servidor iniciado en el puerto 50051...
-2023-06-13 20:16:20,172 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:16:28,780 Nuevo mensaje recibido en el tema Noticias: Hola
-2023-06-13 20:16:28,780 Mensaje enviado al subscriptor en el tema Noticias: Hola
-2023-06-13 20:16:38,351 Nuevo mensaje recibido en el tema Noticias: Hola soy
-2023-06-13 20:16:38,352 Mensaje enviado al subscriptor en el tema Noticias: Hola soy
-2023-06-13 20:18:01,106 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:18:13,154 Nuevo mensaje recibido en el tema Noticias: probando
-2023-06-13 20:18:13,154 Mensaje enviado al subscriptor en el tema Noticias: probando
-2023-06-13 20:18:27,451 Nuevo mensaje recibido en el tema Noticias: probando 2
-2023-06-13 20:18:27,451 Mensaje enviado al subscriptor en el tema Noticias: probando 2
-2023-06-13 20:27:04,699 Deteniendo el servidor...
-2023-06-13 20:27:04,701 Servidor detenido
-2023-06-13 20:27:15,743 Servidor iniciado en el puerto 50051...
-2023-06-13 20:27:41,924 Nuevo cliente suscrito al tema: Noticias
-2023-06-13 20:27:50,789 Nuevo mensaje recibido en el tema Noticias: Hola soy cliente 1324324
-2023-06-13 20:27:50,789 Mensaje enviado al subscriptor ipv6:%5B::1%5D:61463 en el tema Noticias: Hola soy cliente 1324324
-2023-06-13 20:31:26,353 Deteniendo el servidor...
-2023-06-13 20:31:26,356 Servidor detenido
+2023-06-15 17:33:37,611 Servidor iniciado en el puerto 50051...
+2023-06-15 17:33:52,713 15/06/2023:17:33:52 Nuevo cliente suscrito al tema: Noticias
+2023-06-15 17:34:02,575 15/06/2023:17:34:02 Nuevo mensaje recibido en el tema Noticias: Hola
+2023-06-15 17:35:53,736 15/06/2023:17:35:53 Nuevo cliente suscrito al tema: Noticias
+2023-06-15 17:35:59,934 15/06/2023:17:35:59 Nuevo cliente suscrito al tema: Entretenimiento
+2023-06-15 17:36:16,898 15/06/2023:17:36:16 Nuevo cliente suscrito al tema: Noticias
+2023-06-15 17:37:11,048 Deteniendo el servidor...
+2023-06-15 17:37:11,053 Servidor detenido
